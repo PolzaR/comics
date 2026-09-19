@@ -37,7 +37,6 @@ body {
 .panel.tilt-left  { transform: rotate(-1.5deg); }
 .panel.tilt-right { transform: rotate(1.5deg); }
 
-/* Халфтон-паттерн на фоне */
 .panel::before {
   content: '';
   position: absolute;
@@ -57,10 +56,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Bangers', cursive;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 900;
   font-size: 42px;
   color: #000;
-  letter-spacing: 2px;
+  letter-spacing: 6px;
   text-shadow: 3px 3px 0 #fff;
   position: relative;
   overflow: hidden;
@@ -104,52 +104,139 @@ body {
 .bubble.left::after  { left: 30px; }
 
 .bubble .speaker {
-  font-family: 'Bangers', cursive;
-  font-size: 20px;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
   color: #d90429;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   margin-bottom: 6px;
 }
 .bubble .zh {
   font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 500;
   font-size: 26px;
   color: #000;
+  line-height: 1.5;
   margin-bottom: 6px;
 }
 .bubble .pinyin {
+  font-family: 'Inter', sans-serif;
+  font-style: italic;
+  font-weight: 400;
   font-size: 14px;
   color: #666;
-  font-style: italic;
-  margin-bottom: 4px;
+  letter-spacing: 0.5px;
+  line-height: 1.4;
 }
 .bubble .ru {
   font-size: 16px;
   color: #222;
 }
-
-/* Скрытый перевод */
 .bubble .ru.hidden,
 .bubble .pinyin.hidden { display: none; }
 
 /* ===== НАРРАЦИЯ ===== */
 .narration {
-  font-family: 'Bangers', cursive;
-  font-size: 22px;
-  letter-spacing: 1px;
   background: #ffe066;
   border: 4px solid #000;
-  padding: 14px 18px;
+  padding: 18px 22px;
   transform: rotate(-1deg);
   box-shadow: 5px 5px 0 #000;
 }
 
+.narration-zh {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #000;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.narration-pinyin {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  color: #555;
+  letter-spacing: 0.5px;
+  line-height: 1.4;
+}
+
+/* ===== КНОПКА ПЕРЕВОДА ===== */
+.tr-wrap {
+  margin-top: 12px;
+}
+
+.tr-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: #fff;
+  border: 3px solid #000;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #000;
+  box-shadow: 3px 3px 0 #000;
+  transition: all 0.12s;
+}
+.tr-toggle:hover {
+  background: #ffe066;
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 #000;
+}
+.tr-toggle:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 #000;
+}
+.tr-icon {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.tr-text {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease, margin-top 0.25s ease, padding 0.25s ease;
+  margin-top: 0;
+  padding: 0 16px;
+  background: #f5f5f5;
+  border-left: 4px solid #d90429;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  color: #222;
+  line-height: 1.5;
+}
+.tr-text.open {
+  max-height: 500px;
+  margin-top: 10px;
+  padding: 14px 16px;
+}
+
 /* ===== ВЫБОР ===== */
 .choice-question {
-  font-family: 'Bangers', cursive;
-  font-size: 24px;
   margin-bottom: 16px;
-  letter-spacing: 1px;
 }
+.choice-question > div:first-child {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 1.5;
+  color: #000;
+  margin-bottom: 4px;
+}
+.choice-question > div:last-child {
+  font-family: 'Inter', sans-serif;
+  font-style: italic;
+  font-size: 14px;
+  color: #666;
+  letter-spacing: 0.5px;
+}
+
 .choice-options {
   display: flex;
   flex-direction: column;
@@ -158,7 +245,7 @@ body {
 .choice-btn {
   font-family: 'Inter', sans-serif;
   font-size: 17px;
-  font-weight: 700;
+  font-weight: 600;
   text-align: left;
   padding: 16px 20px;
   background: #fff;
@@ -178,13 +265,27 @@ body {
 }
 .choice-btn.correct { background: #8ce99a; }
 .choice-btn.wrong   { background: #ff8787; }
+.choice-btn:disabled { cursor: default; }
+.choice-btn:disabled:hover { transform: none; box-shadow: 5px 5px 0 #000; background: inherit; }
+.choice-btn.correct:disabled:hover { background: #8ce99a; }
+
+/* Список покупок на полке */
+.shop-grid button {
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
 
 /* ===== КНОПКА ДАЛЬШЕ ===== */
 .next-btn {
-  font-family: 'Bangers', cursive;
-  font-size: 22px;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
   letter-spacing: 2px;
-  padding: 12px 28px;
+  padding: 12px 32px;
   background: #d90429;
   color: #fff;
   border: 4px solid #000;
@@ -192,8 +293,23 @@ body {
   box-shadow: 6px 6px 0 #000;
   align-self: flex-end;
   margin-top: 16px;
+  transition: all 0.12s;
 }
-.next-btn:hover { background: #ef233c; }
+.next-btn:hover {
+  background: #ef233c;
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0 #000;
+}
+.next-btn:active {
+  transform: translate(3px, 3px);
+  box-shadow: 2px 2px 0 #000;
+}
+.next-btn:disabled {
+  background: #999;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 6px 6px 0 #000;
+}
 
 /* ===== СТАТУС-БАР ===== */
 .status-bar {
@@ -206,23 +322,62 @@ body {
   padding: 12px 18px;
   display: flex;
   justify-content: space-between;
-  font-family: 'Bangers', cursive;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 500;
   letter-spacing: 1px;
-  font-size: 18px;
+  font-size: 16px;
 }
-.status-bar .money { color: #8ce99a; }
+.status-bar .money { color: #8ce99a; font-weight: 700; }
 .status-bar .money.low { color: #ff8787; }
 
 /* ===== ФИНАЛ ===== */
 .ending {
-  font-family: 'Bangers', cursive;
-  font-size: 40px;
-  letter-spacing: 3px;
+  padding: 40px 36px;
   text-align: center;
-  padding: 40px 20px;
-  border: 6px solid #000;
-  box-shadow: 12px 12px 0 #000;
+  font-family: 'Noto Sans SC', sans-serif;
 }
-.ending.good { background: #8ce99a; }
+
+.ending-title {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 40px;
+  font-weight: 900;
+  letter-spacing: 4px;
+  color: #000;
+  line-height: 1.3;
+  margin-bottom: 24px;
+}
+
+.ending-text {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 19px;
+  font-weight: 500;
+  color: #000;
+  line-height: 1.8;
+  letter-spacing: 0.5px;
+  margin-bottom: 24px;
+}
+
+.ending-achievement {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+.ending-achievement b {
+  font-size: 20px;
+  font-weight: 900;
+  color: #d90429;
+}
+
+.ending-summary {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #333;
+  opacity: 0.8;
+}
+
+.ending.good    { background: #8ce99a; }
 .ending.neutral { background: #ffe066; }
-.ending.bad { background: #ff6b6b; color: #fff; -webkit-text-stroke: 2px #000; }
+.ending.bad     { background: #ff8787; }
